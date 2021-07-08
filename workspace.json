@@ -1,7 +1,124 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "banska-bystrica-faktury": {
+      "root": "apps/banska-bystrica-faktury",
+      "sourceRoot": "apps/banska-bystrica-faktury/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/banska-bystrica-faktury",
+            "index": "apps/banska-bystrica-faktury/src/index.html",
+            "main": "apps/banska-bystrica-faktury/src/main.tsx",
+            "polyfills": "apps/banska-bystrica-faktury/src/polyfills.ts",
+            "tsConfig": "apps/banska-bystrica-faktury/tsconfig.app.json",
+            "assets": [
+              "apps/banska-bystrica-faktury/src/favicon.ico",
+              "apps/banska-bystrica-faktury/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/banska-bystrica-faktury/src/environments/environment.ts",
+                  "with": "apps/banska-bystrica-faktury/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "banska-bystrica-faktury:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "banska-bystrica-faktury:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/banska-bystrica-faktury/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/banska-bystrica-faktury"],
+          "options": {
+            "jestConfig": "apps/banska-bystrica-faktury/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "components": {
+      "root": "libs/components",
+      "sourceRoot": "libs/components/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/components/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/components"],
+          "options": {
+            "jestConfig": "libs/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "styled-components"
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "banska-bystrica-faktury"
 }
